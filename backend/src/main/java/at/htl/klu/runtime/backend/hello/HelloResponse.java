@@ -1,4 +1,3 @@
 package at.htl.klu.runtime.backend.hello;
 
-public record HelloResponse(String message) {
-}
+public record HelloResponse(String message) {}
