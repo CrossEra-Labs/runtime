@@ -1,0 +1,10 @@
+#!/bin/sh
+files=$(git diff --cached --name-only --diff-filter=ACM -- '*.java')
+[ -z "$files" ] && exit 0
+
+repository_root=$(git rev-parse --show-toplevel) || exit 1
+(cd "$repository_root/backend" && mvn spotless:apply) || exit 1
+
+printf '%s\n' "$files" | while IFS= read -r file; do
+    git -C "$repository_root" add -- "$file"
+done
