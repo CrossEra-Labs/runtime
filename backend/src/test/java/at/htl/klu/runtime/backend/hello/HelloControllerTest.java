@@ -10,6 +10,6 @@ class HelloControllerTest {
   void helloReturnsGreeting() {
     HelloResponse response = new HelloController().hello();
 
-    assertEquals("Hallo Welt", response.message());
+    assertEquals("Hello World", response.message());
   }
 }
