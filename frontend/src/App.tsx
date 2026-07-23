@@ -5,6 +5,8 @@ import {
   CssBaseline,
   Typography,
 } from "@mui/material";
+import { HelloWorld } from "./features/hello/HelloWorld";
+
 function App() {
   return (
     <>
@@ -15,9 +17,7 @@ function App() {
             <Typography component="h1" variant="h4" gutterBottom>
               Runtime
             </Typography>
-            <Typography color="text.secondary">
-              Das React-Frontend läuft.
-            </Typography>
+            <HelloWorld />
           </CardContent>
         </Card>
       </Container>

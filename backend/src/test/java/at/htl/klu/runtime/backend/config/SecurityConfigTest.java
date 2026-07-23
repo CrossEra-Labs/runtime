@@ -1,6 +1,5 @@
 package at.htl.klu.runtime.backend.config;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.options;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -32,7 +31,7 @@ class SecurityConfigtest {
         .perform(get("/api/hello"))
         .andExpect(status().isOk())
         .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.message").value("Hallo Welt"));
+        .andExpect(jsonPath("$.message").value("Hello World"));
   }
 
   @Test
