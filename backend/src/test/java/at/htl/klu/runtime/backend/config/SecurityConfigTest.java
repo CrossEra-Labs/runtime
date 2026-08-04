@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @WebMvcTest(controllers = HelloController.class)
 @Import(SecurityConfig.class)
 @TestPropertySource(properties = "app.cors.allowed-origin=http://localhost:5173")
-class SecurityConfigtest {
+class SecurityConfigTest {
 
   @Autowired private MockMvc mockMvc;
 

@@ -23,6 +23,8 @@ public class SecurityConfig {
                 authorize
                     .requestMatchers(HttpMethod.GET, "/api/hello")
                     .permitAll()
+                    .requestMatchers("/actuator/health", "/actuator/health/**")
+                    .permitAll()
                     .anyRequest()
                     .authenticated())
         .cors(Customizer.withDefaults())

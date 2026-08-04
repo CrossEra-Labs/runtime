@@ -48,6 +48,7 @@ Danach sind die Anwendungen unter folgenden Adressen erreichbar:
 
 - [Frontend einrichten, testen und bauen](frontend/README.md)
 - [Backend und Datenbank einrichten und testen](backend/README.md)
+- [Produktivdeployment mit Coolify](docs/deployment-coolify.md)
 
 Bei Pull Requests und Pushes auf `main` prüft GitHub Actions Frontend und
 Backend automatisch.

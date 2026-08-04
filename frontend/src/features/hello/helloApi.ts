@@ -2,7 +2,7 @@ import ky from "ky";
 import type { HelloResponse } from "./hello.types";
 
 const api = ky.create({
-  prefix: import.meta.env.VITE_API_URL,
+  prefix: import.meta.env.VITE_API_URL || "/",
   retry: 0,
 });
 
