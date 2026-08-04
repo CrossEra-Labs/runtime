@@ -54,8 +54,9 @@ Der Coolify-Deploy-Job bleibt dabei deaktiviert, solange die Repository- Variabl
 ## 4. Coolify für GHCR authentifizieren
 
 Die Images eines privaten Repositorys sind standardmäßig ebenfalls privat. In GitHub einen Zugriffstoken mit
-`read:packages` erstellen und gegebenenfalls für die Organisation autorisieren. Anschließend über das Server-Terminal in
-Coolify oder per SSH anmelden:
+`read:packages` erstellen und gegebenenfalls für die Organisation autorisieren. In Coolify beim Zielserver prüfen,
+welcher SSH-Benutzer konfiguriert ist, und sich auf dem Build-/Zielserver exakt als dieser Benutzer anmelden. Coolify
+bindet dessen `~/.docker/config.json` in den temporären Deployment-Container ein.
 
 ```bash
 read -s GHCR_TOKEN
@@ -64,6 +65,8 @@ unset GHCR_TOKEN
 ```
 
 Der Token benötigt keinen Schreibzugriff. Er darf nicht als normale Variable in der Compose-Resource gespeichert werden.
+Danach beide Images testweise mit dem gewünschten `IMAGE_TAG` pullen. Wenn ein separater Coolify-Buildserver aktiv ist,
+muss der Login auch dort unter dessen konfiguriertem SSH-Benutzer erfolgen.
 
 ## 5. Compose-Resource erstellen
 
