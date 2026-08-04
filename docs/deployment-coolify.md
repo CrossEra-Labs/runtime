@@ -48,8 +48,7 @@ ghcr.io/crossera-labs/runtime-frontend:<commit-sha>
 ghcr.io/crossera-labs/runtime-backend:<commit-sha>
 ```
 
-Der Coolify-Deploy-Job bleibt dabei deaktiviert, solange die Repository- Variable `COOLIFY_DEPLOY_ENABLED` nicht auf
-`true` gesetzt wurde.
+Der Coolify-Deploy-Job läuft nach der Einrichtung bei erfolgreichen Pushes auf `main`.
 
 ## 4. Coolify für GHCR authentifizieren
 
@@ -152,20 +151,14 @@ Folgende Repository-Variablen anlegen:
 |----------------------------|---------------------------------------------------------|
 | `COOLIFY_URL`              | Basis-URL der Coolify-Instanz ohne abschließenden Slash |
 | `COOLIFY_APPLICATION_UUID` | Application-UUID der Compose-Resource                   |
-| `COOLIFY_DEPLOY_ENABLED`   | zunächst `false`                                        |
 
 Unter `Settings`, `Environments` zusätzlich ein Environment namens
 `production` erstellen. Dort kann optional eine manuelle Freigabe vor jedem Deployment verlangt werden.
 
-## 12. Automatisches Deployment aktivieren
+## 12. Automatisches Deployment prüfen
 
-Erst nachdem das manuelle Deployment, der API-Token und alle Variablen funktionieren, die Repository-Variable ändern:
-
-```text
-COOLIFY_DEPLOY_ENABLED=true
-```
-
-Ab diesem Zeitpunkt läuft bei einem Push auf `main` folgende Kette:
+Nachdem das manuelle Deployment, der API-Token und alle Variablen funktionieren, läuft bei jedem Push auf `main`
+folgende Kette:
 
 ```text
 Frontend-Prüfung + Backend-Prüfung
@@ -175,8 +168,7 @@ Frontend-Prüfung + Backend-Prüfung
 -> bis zum erfolgreichen Deploymentstatus warten
 ```
 
-Pull Requests lösen niemals ein Produktionsdeployment aus. Wird die Variable gelöscht oder auf `false` gesetzt, bleibt
-der Deploy-Job deaktiviert.
+Pull Requests lösen niemals ein Produktionsdeployment aus.
 
 ## 13. Persistenz und Backups prüfen
 
@@ -222,5 +214,5 @@ postgres: pg_isready
 ```
 
 Bei `502` oder `504` zuerst prüfen, ob `backend` healthy ist und ob keine eigenen Compose-Netzwerke ergänzt wurden. Bei
-einem fehlgeschlagenen Deploy-Job in GitHub prüfen, ob `COOLIFY_TOKEN`, `COOLIFY_URL`,
-`COOLIFY_APPLICATION_UUID` und `COOLIFY_DEPLOY_ENABLED` korrekt gesetzt sind.
+einem fehlgeschlagenen Deploy-Job in GitHub prüfen, ob `COOLIFY_TOKEN`, `COOLIFY_URL` und
+`COOLIFY_APPLICATION_UUID` korrekt gesetzt sind.

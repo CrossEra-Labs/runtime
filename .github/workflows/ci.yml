@@ -147,8 +147,7 @@ jobs:
     needs: containers
     if: >-
       github.event_name == 'push' &&
-      github.ref == 'refs/heads/main' &&
-      vars.COOLIFY_DEPLOY_ENABLED == 'true'
+      github.ref == 'refs/heads/main'
     environment: production
     env:
       COOLIFY_URL: ${{ vars.COOLIFY_URL }}
