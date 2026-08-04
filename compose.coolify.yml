@@ -2,7 +2,7 @@ services:
   backend:
     image: ghcr.io/crossera-labs/runtime-backend:${IMAGE_TAG:?IMAGE_TAG is required}
     environment:
-      DB_HOST: ${DB_HOST:?DB_HOST is required}
+      DB_HOST: postgres
       DB_PORT: 5432
       DB_NAME: ${DB_NAME:-runtime}
       DB_USER: ${DB_USER:-runtime}
