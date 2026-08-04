@@ -1,75 +1,64 @@
-# React + TypeScript + Vite
+# Runtime Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Das Frontend ist eine React-Anwendung mit TypeScript, Vite, Material UI und
+TanStack Query. Es ruft die REST-API des Backends auf.
 
-Currently, two official plugins are available:
+## Voraussetzungen
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 24
+- npm (wird zusammen mit Node.js installiert)
+- ein laufendes Backend auf Port `8080`
 
-## React Compiler
+## Einrichtung
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Im Verzeichnis `frontend` die Umgebungsdatei anlegen und die Abhängigkeiten
+installieren:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+cp .env.example .env
+npm ci
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Die Variable `VITE_API_URL` legt die Adresse des Backends fest. Für die lokale
+Entwicklung ist bereits folgender Wert vorbereitet:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```env
+VITE_API_URL=http://localhost:8080
 ```
+
+## Entwicklungsserver starten
+
+```bash
+npm run dev
+```
+
+Das Frontend ist anschließend unter <http://localhost:5173> erreichbar.
+
+## Tests und Qualitätsprüfungen
+
+Alle Unit-Tests einmalig ausführen:
+
+```bash
+npm test
+```
+
+Linting ausführen:
+
+```bash
+npm run lint
+```
+
+Einen Produktions-Build erstellen:
+
+```bash
+npm run build
+```
+
+Vor einem Push sollten alle drei Befehle erfolgreich durchlaufen. GitHub
+Actions führt dieselben Prüfungen bei Pull Requests und Pushes auf `main` aus.
+
+## Wichtige Verzeichnisse
+
+- `src/features`: fachlich zusammengehörige Komponenten, Hooks und API-Aufrufe
+- `src/test`: gemeinsames Setup für Vitest und Testing Library
+- `dist`: erzeugter Produktions-Build, wird nicht eingecheckt
