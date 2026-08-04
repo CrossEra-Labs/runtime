@@ -2,7 +2,7 @@ services:
   backend:
     image: ghcr.io/crossera-labs/runtime-backend:${IMAGE_TAG:?IMAGE_TAG is required}
     environment:
-      DB_HOST: postgres
+      DB_HOST: ${DB_HOST:?DB_HOST is required}
       DB_PORT: 5432
       DB_NAME: ${DB_NAME:-runtime}
       DB_USER: ${DB_USER:-runtime}
@@ -38,5 +38,3 @@ services:
       retries: 5
       start_period: 10s
     restart: unless-stopped
-volumes:
-  postgres_data:
