@@ -10,6 +10,6 @@ public class HelloController {
 
   @GetMapping
   public HelloResponse hello() {
-    return new HelloResponse("Hello World");
+    return new HelloResponse("Hello World 3 ");
   }
 }
